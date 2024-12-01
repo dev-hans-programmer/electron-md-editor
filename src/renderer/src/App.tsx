@@ -1,6 +1,7 @@
 import { ActionButtonsRow } from './components/action-button-row'
 import { Content, RootLayout, Sidebar } from './components/app-layout'
 import { DraggableTopBar } from './components/draggable-topbar'
+import MarkdownEditor from './components/markdown-editor'
 import { NotePreviewList } from './components/note-preview-list'
 
 function App(): JSX.Element {
@@ -12,7 +13,9 @@ function App(): JSX.Element {
           <ActionButtonsRow className='flex justify-between mt-1' />
           <NotePreviewList />
         </Sidebar>
-        <Content className='border-l bg-zinc-900/50 border-l-white/20'>Content</Content>
+        <Content className='border-l bg-zinc-900/50 border-l-white/20'>
+          <MarkdownEditor />
+        </Content>
       </RootLayout>
     </>
   )
