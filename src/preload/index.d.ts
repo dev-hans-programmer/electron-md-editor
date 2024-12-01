@@ -2,7 +2,7 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
 
 interface Context {
-  getName: () => string
+  locale: string
 }
 
 declare global {
