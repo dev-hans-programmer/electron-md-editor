@@ -1,13 +1,12 @@
-import { notesAtom, selectedNoteIndexAtom } from '@renderer/store'
-import { useAtom, useAtomValue } from 'jotai'
+import { setSelectedNoteIndex } from '@renderer/store/notes-slice'
+import { useAppDispatch, useAppSelector } from '@renderer/store/redux-store'
 
 export const useNotesList = ({ onSelect }: { onSelect?: () => void }) => {
-  const notes = useAtomValue(notesAtom)
-
-  const [selectedNoteIndex, setSelectedNoteIndex] = useAtom(selectedNoteIndexAtom)
+  const { notes, selectedNoteIndex } = useAppSelector((state) => state.notes)
+  const dispatch = useAppDispatch()
 
   const handleNoteSelect = (index: number) => {
-    setSelectedNoteIndex(index)
+    dispatch(setSelectedNoteIndex(index))
     onSelect?.()
   }
 

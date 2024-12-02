@@ -1,12 +1,12 @@
-import { useSetAtom } from 'jotai'
 import { ActionButton, ActionButtonProps } from './action-button'
 import { LuFileSignature } from 'react-icons/lu'
-import { createNewNoteAtom } from '@renderer/store'
+import { useAppDispatch } from '@renderer/store/redux-store'
+import { createNewNote } from '@renderer/store/notes-slice'
 
 export const NewNoteButton = ({ ...props }: ActionButtonProps) => {
-  const createEmptyNote = useSetAtom(createNewNoteAtom)
+  const dispatch = useAppDispatch()
   const handleCreation = async () => {
-    createEmptyNote()
+    dispatch(createNewNote())
   }
 
   return (

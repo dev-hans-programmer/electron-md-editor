@@ -1,8 +1,12 @@
-import { selectedNoteAtom } from '@renderer/store'
-import { useAtomValue } from 'jotai'
+import { useAppSelector } from '@renderer/store/redux-store'
 
 function useMarkdownEditor() {
-  const selectedNote = useAtomValue(selectedNoteAtom)
+  const { notes, selectedNoteIndex } = useAppSelector((state) => state.notes)
+
+  const selectedNote =
+    selectedNoteIndex || selectedNoteIndex === 0
+      ? { ...notes[selectedNoteIndex], content: `Hello World ${selectedNoteIndex}` }
+      : null
 
   return {
     selectedNote
