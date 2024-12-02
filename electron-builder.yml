@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: note-hans
+productName: NoteHans
 directories:
   buildResources: build
 files:
