@@ -1,12 +1,28 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { ActionButtonsRow } from './components/action-button-row'
 import { Content, RootLayout, Sidebar } from './components/app-layout'
 import { DraggableTopBar } from './components/draggable-topbar'
 import { FloatingNoteTitle } from './components/floating-note-title'
 import MarkdownEditor from './components/markdown-editor'
 import { NotePreviewList } from './components/note-preview-list'
+import { useAppDispatch } from './store/redux-store'
+import { setNotes } from './store/notes-slice'
 
 function App(): JSX.Element {
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    async function fetchNotes() {
+      try {
+        const notes = await window.context.getNotes()
+        dispatch(setNotes(notes.sort((a, b) => b.lastEditTime - a.lastEditTime)))
+      } catch (err) {
+        console.log('[ERROR]', err)
+      }
+    }
+    void fetchNotes()
+  }, [])
+
   const contentContainerRef = useRef<HTMLDivElement>(null)
 
   const resetScroll = () => contentContainerRef.current?.scroll(0, 0)

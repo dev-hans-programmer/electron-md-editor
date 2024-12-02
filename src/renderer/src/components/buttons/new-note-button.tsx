@@ -6,7 +6,9 @@ import { createNewNote } from '@renderer/store/notes-slice'
 export const NewNoteButton = ({ ...props }: ActionButtonProps) => {
   const dispatch = useAppDispatch()
   const handleCreation = async () => {
-    dispatch(createNewNote())
+    const title = await window.context.createNote()
+
+    if (title) dispatch(createNewNote(title))
   }
 
   return (
